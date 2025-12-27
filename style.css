@@ -191,3 +191,27 @@ header {
     text-align: center;
   }
 }
+
+.input-data {
+  width: 100%;
+  padding: 16px;
+  border-radius: 8px;
+  border: 2px solid #d4af37;
+  background-color: #fff;
+  font-size: 16px;
+  color: #000;
+  cursor: pointer;
+}
+
+/* Ícone do calendário / relógio (Android / iOS) */
+.input-data::-webkit-calendar-picker-indicator {
+  opacity: 1;
+  cursor: pointer;
+  filter: invert(50%);
+}
+
+/* feedback visual ao tocar */
+.input-data:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.4);
+}
