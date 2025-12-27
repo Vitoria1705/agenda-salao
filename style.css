@@ -1,0 +1,113 @@
+:root {
+  --dourado: #d4af37;
+}
+
+/* ================= GERAL ================= */
+body {
+  margin: 0;
+  padding: 20px;
+  background: #f5c842; /* FUNDO AMARELO DA LISTA */
+  font-family: Arial, sans-serif;
+  color: #000;
+}
+
+/* ================= TOPO ================= */
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 120px;
+  position: absolute;
+  left: 15px;
+}
+
+/* ================= LISTA ================= */
+.lista {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ================= GRID SEG–SEX ================= */
+.semana {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 1024px) {
+  .semana {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .semana {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================= DIA ================= */
+.dia {
+  background: #ffffff;
+  border: 2px solid var(--dourado);
+  border-radius: 12px;
+  padding: 15px;
+}
+
+.dia.hoje {
+  border: 3px solid #2ecc71;
+  box-shadow: 0 0 15px rgba(46, 204, 113, 0.4);
+}
+
+.dia h3 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* ================= CARD ================= */
+.card {
+  background: #fff;
+  border: 1px solid var(--dourado);
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+/* ================= BOTÕES ================= */
+.botoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.botoes button {
+  flex: 1;
+  padding: 8px;
+  border-radius: 20px;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.btn-1d {
+  background: var(--dourado);
+}
+
+.btn-1h {
+  background: #b8962e;
+}
+
+.btn-confirmar {
+  background: #2ecc71;
+}
+
+.btn-cancelar {
+  background: #e74c3c;
+  color: #fff;
+}

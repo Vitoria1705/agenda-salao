@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa da Beleza | Agenda do Salão</title>
+
+    <style>
+        :root {
+            --dourado: #d4af37;
+        }
+
+        body {
+            margin: 0;
+            background: #f5c842;
+            /* AMARELO */
+            color: #000;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 15px;
+        }
+
+        .logo {
+            width: 150px;
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            height: auto;
+        }
+
+        .logo img {
+            width: 220px;
+            max-width: none;
+            height: auto;
+        }
+
+        @media (max-width: 480px) {
+            .logo img {
+                width: 160px;
+            }
+        }
+
+
+
+        h2 {
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .lista {
+            display: flex;
+            flex-direction: column;
+            /* dias um embaixo do outro */
+            gap: 10px;
+            margin: 20px;
+        }
+
+
+        .card {
+            width: 300px;
+            padding: 15px;
+            border: 1px solid #d4af37;
+            border-radius: 10px;
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.15);
+            background: #fff;
+        }
+
+        .card p {
+            margin: 5px 0;
+        }
+
+        .botoes {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .botoes button {
+            flex: 1;
+            padding: 8px;
+            border-radius: 20px;
+            border: none;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .btn-1d {
+            background: var(--dourado);
+            color: #000;
+        }
+
+        .btn-1h {
+            background: #b8962e;
+            color: #000;
+        }
+
+        .btn-confirmar {
+            background: #2ecc71;
+            color: #000;
+        }
+
+        .btn-cancelar {
+            background: #e74c3c;
+            color: #fff;
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                width: 95%;
+            }
+
+            .logo {
+                width: 80px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <img src="img/logobeleza.jpg" alt="Casa da Beleza" class="logo">
+    </header>
+
+    <h2>AGENDA DO SALÃO</h2>
+    <div style="display:flex; gap:10px; justify-content:center; margin-bottom:20px;">
+        <select id="filtroMes">
+            <option value="">Todos os meses</option>
+            <option value="0">Janeiro</option>
+            <option value="1">Fevereiro</option>
+            <option value="2">Março</option>
+            <option value="3">Abril</option>
+            <option value="4">Maio</option>
+            <option value="5">Junho</option>
+            <option value="6">Julho</option>
+            <option value="7">Agosto</option>
+            <option value="8">Setembro</option>
+            <option value="9">Outubro</option>
+            <option value="10">Novembro</option>
+            <option value="11">Dezembro</option>
+        </select>
+
+        <select id="filtroAno">
+            <option value="">Todos os anos</option>
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
+        </select>
+    </div>
+
+
+    <div class="lista" id="lista"></div>
+
+    <script>
+        const listaDiv = document.getElementById("lista");
+        const API = "https://script.google.com/macros/s/AKfycbzGS_1qPHENhrzndQy5mysQjVGrJwd7Mmy5sUJW6-1G4DXe99KzklBBEJYIWrYAnm2-/exec";
+
+
+        function gerarMsg(nome, servico, hora, tipo) {
+            const cliente = nome ? nome : "cliente";
+
+            if (tipo === "1D") {
+                return `Olá ${cliente}, tudo bem?
+Só passando para lembrar que você tem um horário marcado comigo amanhã às ${hora}.
+Te espero!`;
+            }
+
+            if (tipo === "1H") {
+                return `Olá ${cliente}, tudo bem?
+Seu horário é daqui a 1 hora às ${hora}.
+Te espero!`;
+            }
+
+            if (tipo === "CONFIRMAR") {
+                return `Olá ${cliente}, tudo bem?
+Seu horário está confirmado para às ${hora}.
+Te espero!`;
+            }
+
+            if (tipo === "CANCELAR") {
+                return `Olá ${cliente}, tudo bem?
+Infelizmente seu horário marcado para às ${hora} foi cancelado.
+Podemos reagendar?`;
+            }
+        }
+
+        function abrirWhats(tel, msg) {
+            if (!tel) return alert("Telefone não informado");
+            window.open(`https://wa.me/${tel}?text=${encodeURIComponent(msg)}`);
+        }
+
+
+        function tituloData(dataStr) {
+            const data = new Date(dataStr + "T00:00:00");
+
+            const dias = [
+                "DOMINGO", "SEGUNDA", "TERÇA",
+                "QUARTA", "QUINTA", "SEXTA", "SÁBADO"
+            ];
+
+            const diaSemana = dias[data.getDay()];
+            const dia = String(data.getDate()).padStart(2, "0");
+            const mes = String(data.getMonth() + 1).padStart(2, "0");
+            const ano = data.getFullYear();
+
+            return `${diaSemana} – ${dia}/${mes}/${ano}`;
+        }
+
+
+        fetch(API)
+            .then(res => res.json())
+            .then(dados => {
+
+                if (!dados || dados.length === 0) {
+                    listaDiv.innerHTML = "<p>Não há agendamentos.</p>";
+                    return;
+                }
+
+                listaDiv.innerHTML = "";
+
+                const porData = {};
+
+                dados.forEach(c => {
+                    if (!c.data) return;
+
+                    if (!porData[c.data]) {
+                        porData[c.data] = [];
+                    }
+
+                    porData[c.data].push(c);
+                });
+
+                const datasOrdenadas = Object.keys(porData).sort();
+
+                datasOrdenadas.forEach(data => {
+
+                    const diaDiv = document.createElement("div");
+                    diaDiv.className = "dia";
+
+                    const h3 = document.createElement("h3");
+                    h3.textContent = tituloData(data);
+                    diaDiv.appendChild(h3);
+
+                    porData[data].sort((a, b) => a.hora.localeCompare(b.hora));
+
+                    porData[data].forEach(c => {
+                        const card = document.createElement("div");
+                        card.className = "card";
+
+                        card.innerHTML = `
+          <p><strong>Cliente:</strong> ${c.nome}</p>
+          <p><strong>Serviço:</strong> ${c.servico}</p>
+          <p><strong>Horário:</strong> ${c.hora}</p>
+
+          <div class="botoes">
+            <button class="btn-1d" onclick="abrirWhats('${c.telefone}', gerarMsg('${c.nome}','${c.servico}','${c.hora}','1D'))">Lembrete 1D</button>
+            <button class="btn-1h" onclick="abrirWhats('${c.telefone}', gerarMsg('${c.nome}','${c.servico}','${c.hora}','1H'))">Lembrete 1H</button>
+            <button class="btn-confirmar" onclick="abrirWhats('${c.telefone}', gerarMsg('${c.nome}','${c.servico}','${c.hora}','CONFIRMAR'))">Confirmar</button>
+            <button class="btn-cancelar" onclick="abrirWhats('${c.telefone}', gerarMsg('${c.nome}','${c.servico}','${c.hora}','CANCELAR'))">Cancelar</button>
+          </div>
+        `;
+
+                        diaDiv.appendChild(card);
+                    });
+
+                    listaDiv.appendChild(diaDiv);
+                });
+
+            })
+            .catch(err => {
+                console.error(err);
+                listaDiv.innerHTML = "<p>Erro ao carregar agendamentos.</p>";
+            });
+    </script>
+
+</body>
+
+</html>
