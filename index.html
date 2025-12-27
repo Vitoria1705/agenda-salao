@@ -13,9 +13,6 @@
       font-family: Arial, sans-serif;
       color: #000;
     }
-
-
-    /* TOPO */
     .topo {
       padding: 10px 20px;
       display: flex;
@@ -35,7 +32,7 @@
 
     @media (max-width: 480px) {
       .logo {
-        width: 90px;
+        width: 80px;
       }
     }
 
@@ -76,7 +73,6 @@
     }
 
 
-    /* BOTÃO LUXO */
     .card-form button {
       width: 100%;
       padding: 12px;
@@ -95,7 +91,6 @@
       transform: scale(1.02);
     }
 
-    /* MOBILE */
     @media (max-width: 480px) {
       .container {
         margin-top: 20px;
@@ -112,8 +107,8 @@
 <body>
 
   <header class="topo">
-    <img src="logobeleza.jpg" alt="Casa da Beleza" class="logo">
-    <h1 class="titulo">Agendamentos</h1>
+    <img src="img/logobeleza.jpg" alt="Casa da Beleza" class="logo">
+<h2 class="titulo-agenda">AGENDAMENTOS</h2>
   </header>
 
   <div class="container">
@@ -127,14 +122,8 @@
       <label>Serviço</label>
       <input id="servico" type="text" placeholder="Ex: Escova">
 
-     <label for="data">Data</label>
-<input
-  type="date"
-  id="data"
-  name="data"
-  class="input-data"
-  required
->
+      <label for="data">Data</label>
+      <input type="date" id="data" name="data" class="input-data" required>
 
       <label>Horário</label>
       <input id="hora" type="time">
@@ -169,7 +158,4 @@
 
 </body>
 
-
 </html>
-
-
