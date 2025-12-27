@@ -163,7 +163,21 @@ function formatarDataInput(input) {
   if (valor.length > 5) valor = valor.slice(0, 5) + "/" + valor.slice(5, 9);
   input.value = valor;
 }
+function formatarDataInput(input) {
+  let v = input.value.replace(/\D/g, "");
+  if (v.length > 2) v = v.slice(0,2) + "/" + v.slice(2);
+  if (v.length > 5) v = v.slice(0,5) + "/" + v.slice(5,9);
+  input.value = v;
+}
+
+function formatarHoraInput(input) {
+  let v = input.value.replace(/\D/g, "");
+  if (v.length > 2) v = v.slice(0,2) + ":" + v.slice(2,4);
+  input.value = v;
+}
+
 
 filtroMes.addEventListener("change", carregarAgenda);
 filtroAno.addEventListener("change", carregarAgenda);
 window.onload = carregarAgenda;
+
