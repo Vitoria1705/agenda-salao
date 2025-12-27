@@ -174,20 +174,18 @@ header {
 @media (max-width: 600px) {
   header {
     flex-direction: column;
-  }
-}
-
-@media (max-width: 600px) {
-  header {
-    flex-direction: column;
+    padding-top: 20px;
   }
 
   .logo {
     position: static;
-    margin-bottom: 10px;
+    width: 100px;
+    margin-bottom: 15px;
   }
 
-  .titulo-agenda {
-    margin-top: 10px;
+   .titulo-agenda {
+    margin-top: 25px;
+    font-size: 22px;
+    text-align: center;
   }
 }
