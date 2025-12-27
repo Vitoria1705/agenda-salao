@@ -5,7 +5,8 @@
 body {
   margin: 0;
   padding: 20px;
-  background: #f5c842; /* FUNDO AMARELO DA LISTA */
+  background: #f5c842;
+  /* FUNDO AMARELO DA LISTA */
   font-family: Arial, sans-serif;
   color: #000;
 }
@@ -104,6 +105,7 @@ header {
   background: #e74c3c;
   color: #fff;
 }
+
 .input-data {
   width: 100%;
   padding: 14px;
@@ -118,15 +120,18 @@ header {
   cursor: pointer;
   filter: invert(60%);
 }
+
 .input-data:focus {
   outline: none;
   box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.4);
 }
+
 .titulo-agenda {
   color: #000;
   font-size: 24px;
   font-weight: bold;
 }
+
 @media (max-width: 600px) {
   header {
     padding-top: 50px;
@@ -139,12 +144,35 @@ header {
     margin-bottom: 10px;
   }
 
-  header h1 {
+  .titulo-agenda {
     margin-top: 10px;
     font-size: 22px;
   }
 }
 
+.dica-data {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+  color: #555;
+}
 
+/* melhora ainda mais no celular */
+@media (max-width: 480px) {
+  .dica-data {
+    font-size: 14px;
+  }
+}
 
+@media (max-width: 480px) {
+  .input-data {
+    padding: 16px;
+    font-size: 18px;
+  }
+}
 
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+  }
+}
