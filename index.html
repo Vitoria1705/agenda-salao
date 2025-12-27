@@ -123,13 +123,18 @@
       <label>Serviço</label>
       <input id="servico" type="text" placeholder="Ex: Escova">
 
+     
       <label for="data">Data</label>
-      <input type="date" id="data" name="data" class="input-data" required>
-      <small class="dica-data">Toque no calendário para escolher a data</small>
+      <input type="text" id="data" class="input-data" placeholder="dd/mm/aaaa" maxlength="10"
+        oninput="formatarDataInput(this)" required>
+      <small class="dica-data">Digite ou toque para informar a data</small>
 
 
-      <label>Horário</label>
-      <input id="hora" type="time">
+
+      <label for="hora">Horário</label>
+      <input type="text" id="hora" class="input-data" placeholder="--:--" maxlength="5"
+        oninput="formatarHoraInput(this)">
+
 
       <button type="button" onclick="agendar()">Agendar</button>
     </div>
@@ -162,3 +167,4 @@
 </body>
 
 </html>
+
