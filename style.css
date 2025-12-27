@@ -1,5 +1,8 @@
 :root {
-  --dourado: #d4af37;
+  --dourado: #C6A85B;
+  --dourado-escuro: #A8893D;
+  --preto: #111;
+  --cinza: #f7f7f7;
 }
 
 body {
@@ -215,3 +218,4 @@ header {
   outline: none;
   box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.4);
 }
+
