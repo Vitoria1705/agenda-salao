@@ -111,3 +111,25 @@ header {
   background: #e74c3c;
   color: #fff;
 }
+.input-data {
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  border: 2px solid #d4af37;
+  background-color: #fff;
+  font-size: 16px;
+  color: #000;
+}
+
+/* Ícone de calendário mais visível */
+.input-data::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(60%);
+}
+
+/* Efeito ao clicar */
+.input-data:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.4);
+}
+
