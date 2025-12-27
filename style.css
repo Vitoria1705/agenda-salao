@@ -2,7 +2,6 @@
   --dourado: #d4af37;
 }
 
-/* ================= GERAL ================= */
 body {
   margin: 0;
   padding: 20px;
@@ -11,7 +10,6 @@ body {
   color: #000;
 }
 
-/* ================= TOPO ================= */
 header {
   display: flex;
   justify-content: center;
@@ -26,13 +24,11 @@ header {
   left: 15px;
 }
 
-/* ================= LISTA ================= */
 .lista {
   max-width: 1400px;
   margin: 0 auto;
 }
 
-/* ================= GRID SEG–SEX ================= */
 .semana {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -51,7 +47,6 @@ header {
   }
 }
 
-/* ================= DIA ================= */
 .dia {
   background: #ffffff;
   border: 2px solid var(--dourado);
@@ -69,7 +64,6 @@ header {
   margin-bottom: 10px;
 }
 
-/* ================= CARD ================= */
 .card {
   background: #fff;
   border: 1px solid var(--dourado);
@@ -78,7 +72,6 @@ header {
   margin-bottom: 12px;
 }
 
-/* ================= BOTÕES ================= */
 .botoes {
   display: flex;
   flex-wrap: wrap;
@@ -121,15 +114,17 @@ header {
   color: #000;
 }
 
-/* Ícone de calendário mais visível */
 .input-data::-webkit-calendar-picker-indicator {
   cursor: pointer;
   filter: invert(60%);
 }
-
-/* Efeito ao clicar */
 .input-data:focus {
   outline: none;
   box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.4);
+}
+.titulo-agenda {
+  color: #000;
+  font-size: 24px;
+  font-weight: bold;
 }
 
