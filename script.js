@@ -7,28 +7,30 @@ const filtroAno = document.getElementById("filtroAno");
 /* ================= MENSAGENS WHATS ================= */
 function gerarMsg(nome, servico, hora, tipo) {
   const cliente = nome || "cliente";
+  const serv = servico || "serviço";
+  const h = hora || "--:--";
 
   if (tipo === "1D") {
     return `Olá ${cliente}, tudo bem?
-Só passando para lembrar que você tem um horário marcado amanhã às ${hora}.
+Só passando para lembrar que você tem um horário marcado amanhã às ${h}.
 Te espero!`;
   }
 
   if (tipo === "1H") {
     return `Olá ${cliente}, tudo bem?
-Seu horário é daqui a 1 hora, às ${hora}.
+Seu horário é daqui a 1 hora, às ${h}.
 Te espero!`;
   }
 
   if (tipo === "CONFIRMAR") {
     return `Olá ${cliente}, tudo bem?
-Seu horário para ${servico} às ${hora} está confirmado.
+Seu horário para ${serv} às ${h} está confirmado.
 Te espero!`;
   }
 
   if (tipo === "CANCELAR") {
     return `Olá ${cliente}, tudo bem?
-Seu horário das ${hora} foi cancelado.
+Seu horário das ${h} foi cancelado.
 Podemos reagendar?`;
   }
 }
@@ -60,8 +62,8 @@ function criarCard(c) {
 
   card.innerHTML = `
     <p><strong>Cliente:</strong> ${c.nome || "Não informado"}</p>
-    <p><strong>Serviço:</strong> ${c.servico}</p>
-    <p><strong>Horário:</strong> ${c.hora}</p>
+    <p><strong>Serviço:</strong> ${c.servico || "—"}</p>
+    <p><strong>Horário:</strong> ${c.hora || "--:--"}</p>
 
     <div class="botoes">
       <button class="btn-1d"
@@ -108,9 +110,8 @@ function carregarAgenda() {
         if (!c.data) return;
 
         const dataObj = new Date(c.data + "T00:00:00");
-        const diaSemana = dataObj.getDay(); // 0 dom | 6 sáb
+        const diaSemana = dataObj.getDay();
 
-        // ❌ Ignora sábado e domingo
         if (diaSemana === 0 || diaSemana === 6) return;
 
         const ano = dataObj.getFullYear();
@@ -153,6 +154,14 @@ function carregarAgenda() {
       console.error(err);
       listaDiv.innerHTML = "<p>Erro ao carregar agenda.</p>";
     });
+}
+
+/* ================= INPUT DATA TEXTO ================= */
+function formatarDataInput(input) {
+  let valor = input.value.replace(/\D/g, "");
+  if (valor.length > 2) valor = valor.slice(0, 2) + "/" + valor.slice(2);
+  if (valor.length > 5) valor = valor.slice(0, 5) + "/" + valor.slice(5, 9);
+  input.value = valor;
 }
 
 filtroMes.addEventListener("change", carregarAgenda);
