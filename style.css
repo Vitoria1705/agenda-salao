@@ -5,32 +5,59 @@
   --cinza: #f7f7f7;
 }
 
+/* ===== BASE ===== */
 body {
   margin: 0;
   padding: 20px;
-  background: #f5c842;
-  /* FUNDO AMARELO DA LISTA */
+  background: #f7f7f7; /* tira o amarelo forte */
   font-family: Arial, sans-serif;
-  color: #000;
+  color: var(--preto);
 }
 
-header {
+/* ===== TOPO ===== */
+.topo {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   position: relative;
-  margin-bottom: 20px;
+  padding: 20px 0 30px;
+  background: #fff;
+  border-bottom: 2px solid var(--dourado);
 }
 
+/* LOGO */
 .logo {
   width: 120px;
   position: absolute;
-  left: 15px;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
+/* TÍTULO */
+.titulo-agenda {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--preto);
+  text-align: center;
+  position: relative;
+}
+
+/* detalhe dourado embaixo do título */
+.titulo-agenda::after {
+  content: "";
+  width: 70px;
+  height: 3px;
+  background: var(--dourado);
+  display: block;
+  margin: 8px auto 0;
+  border-radius: 3px;
+}
+
+/* ===== LISTA ===== */
 .lista {
   max-width: 1400px;
-  margin: 0 auto;
+  margin: 30px auto 0;
 }
 
 .semana {
@@ -51,6 +78,7 @@ header {
   }
 }
 
+/* ===== DIA ===== */
 .dia {
   background: #ffffff;
   border: 2px solid var(--dourado);
@@ -60,7 +88,7 @@ header {
 
 .dia.hoje {
   border: 3px solid #2ecc71;
-  box-shadow: 0 0 15px rgba(46, 204, 113, 0.4);
+  box-shadow: 0 0 12px rgba(46, 204, 113, 0.3);
 }
 
 .dia h3 {
@@ -68,6 +96,7 @@ header {
   margin-bottom: 10px;
 }
 
+/* ===== CARD ===== */
 .card {
   background: #fff;
   border: 1px solid var(--dourado);
@@ -76,6 +105,7 @@ header {
   margin-bottom: 12px;
 }
 
+/* ===== BOTÕES ===== */
 .botoes {
   display: flex;
   flex-wrap: wrap;
@@ -97,7 +127,7 @@ header {
 }
 
 .btn-1h {
-  background: #b8962e;
+  background: var(--dourado-escuro);
 }
 
 .btn-confirmar {
@@ -109,50 +139,29 @@ header {
   color: #fff;
 }
 
+/* ===== INPUT DATA / HORA ===== */
 .input-data {
   width: 100%;
-  padding: 14px;
+  padding: 16px;
   border-radius: 8px;
-  border: 2px solid #d4af37;
+  border: 2px solid var(--dourado);
   background-color: #fff;
   font-size: 16px;
-  color: #000;
+  color: var(--preto);
+  cursor: pointer;
 }
 
 .input-data::-webkit-calendar-picker-indicator {
   cursor: pointer;
-  filter: invert(60%);
+  filter: invert(50%);
 }
 
 .input-data:focus {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.4);
+  box-shadow: 0 0 0 3px rgba(198, 168, 91, 0.4);
 }
 
-.titulo-agenda {
-  color: #000;
-  font-size: 24px;
-  font-weight: bold;
-}
-
-@media (max-width: 600px) {
-  header {
-    padding-top: 50px;
-    align-items: center;
-  }
-
-  .logo {
-    position: static;
-    width: 100px;
-    margin-bottom: 10px;
-  }
-
-  .titulo-agenda {
-    margin-top: 10px;
-    font-size: 22px;
-  }
-}
-
+/* ===== TEXTO DE DICA ===== */
 .dica-data {
   display: block;
   margin-top: 6px;
@@ -160,62 +169,32 @@ header {
   color: #555;
 }
 
-/* melhora ainda mais no celular */
-@media (max-width: 480px) {
-  .dica-data {
-    font-size: 14px;
+/* ===== MOBILE ===== */
+@media (max-width: 600px) {
+  .topo {
+    flex-direction: column;
+    padding-top: 30px;
+  }
+
+  .logo {
+    position: static;
+    transform: none;
+    width: 100px;
+    margin-bottom: 15px;
+  }
+
+  .titulo-agenda {
+    font-size: 22px;
+    margin-top: 10px;
   }
 }
 
 @media (max-width: 480px) {
   .input-data {
-    padding: 16px;
     font-size: 18px;
   }
-}
 
-@media (max-width: 600px) {
-  header {
-    flex-direction: column;
-    align-items: center;
-    padding-top: 20px;
-  }
-
-  .logo {
-    position: relative; 
-    left: auto;
-    width: 100px;
-    margin-bottom: 20px;
-  }
-
-  .titulo-agenda {
-    margin-top: 10px;
-    font-size: 22px;
-    text-align: center;
+  .dica-data {
+    font-size: 14px;
   }
 }
-
-.input-data {
-  width: 100%;
-  padding: 16px;
-  border-radius: 8px;
-  border: 2px solid #d4af37;
-  background-color: #fff;
-  font-size: 16px;
-  color: #000;
-  cursor: pointer;
-}
-
-/* Ícone do calendário / relógio (Android / iOS) */
-.input-data::-webkit-calendar-picker-indicator {
-  opacity: 1;
-  cursor: pointer;
-  filter: invert(50%);
-}
-
-/* feedback visual ao tocar */
-.input-data:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.4);
-}
-
