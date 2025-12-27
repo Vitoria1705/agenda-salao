@@ -176,3 +176,18 @@ header {
     flex-direction: column;
   }
 }
+
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+  }
+
+  .logo {
+    position: static;
+    margin-bottom: 10px;
+  }
+
+  .titulo-agenda {
+    margin-top: 10px;
+  }
+}
